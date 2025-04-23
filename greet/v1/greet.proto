@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package greet.v1;
+
+option go_package = "github.com/cybozu/connect-rpc-report/gen/greet/v1;greetv1";
+
+message GreetRequest {
+  string name = 1;
+  string address = 2;
+}
+
+message GreetResponse {
+  string greeting1 = 1;
+  string greeting = 2;
+  MyCustomOption enum1 = 3;
+  MyCustomOption enum2 = 4;
+}
+
+service GreetService {
+  rpc Greet(GreetRequest) returns (GreetResponse) {}
+}
+
+enum SomeEnum {
+  // Default value
+  SOME_ENUM_UNSPECIFIED = 0;
+  // First value
+  SOME_ENUM_FIRST = 1;
+  // Second value
+  SOME_ENUM_SECOND = 2;
+}
+
+message MyCustomOption {
+  SomeEnum some_enum = 1;
+}
+

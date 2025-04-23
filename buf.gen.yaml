@@ -1,0 +1,14 @@
+version: v2
+plugins:
+  - remote: buf.build/protocolbuffers/go
+    out: gen
+    opt: paths=source_relative
+  - remote: buf.build/connectrpc/go
+    out: gen
+    opt: paths=source_relative 
+  # - local: protoc-gen-connect-dart # protoc-gen-connect-dart in your PATH
+  #   out: flutter_app/lib/gen
+  # - local: protoc-gen-dart # protoc-gen-dart in your PATH
+  #   out: flutter_app/lib/gen
+  #   include_wkt: true
+  #   include_imports: true
