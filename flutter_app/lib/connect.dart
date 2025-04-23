@@ -16,15 +16,15 @@ final GreetServiceClient greetingClient = GreetServiceClient(transport);
 Future<GreetResponse> request(String name) =>
     greetingClient.greet(GreetRequest(name: name));
 
-  /// Call the request and refresh the token if it is expired
-  Future<T> call<T>(Future<T> Function() request) async {
-    try {
+/// Call the request and refresh the token if it is expired
+Future<T> call<T>(Future<T> Function() request) async {
+  try {
+    return await request();
+  } catch (error) {
+    // If the token is expired, refresh the token and retry the request
+    if (error is ConnectException) {
       return await request();
-    } catch (error) {
-      // If the token is expired, refresh the token and retry the request
-      if (error is ConnectException) {
-        return await request();
-      }
-      rethrow;
     }
+    rethrow;
   }
+}
